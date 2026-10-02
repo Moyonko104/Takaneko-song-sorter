@@ -135,6 +135,49 @@ body {
   color: #888888;
 }
 
+.card > .player {
+  display: none;
+  align-items: center;
+  margin: 0.8em 5px 0.2em;
+  cursor: pointer;
+}
+
+.player > .playbtn {
+  width: 28px;
+  font-size: 0.8em;
+  color: #d0608a;
+}
+
+.player > .playbar {
+  flex: 1;
+  height: 12px;
+  padding: 2px;
+  border: 1px solid #77c1dc;
+  border-radius: 10px;
+}
+
+.player > .playbar > .playfill {
+  height: 100%;
+  width: 0%;
+  border-radius: 8px;
+  background-color: #a9dcee;
+  transition: width 0.3s linear;
+}
+
+.player.playing > .playbar > .playfill {
+  background: linear-gradient(90deg, #c8e6f3, #8fcce6, #c8e6f3);
+  background-size: 40px 100%;
+  animation: water 1.2s linear infinite;
+}
+
+@keyframes water {
+  to { background-position: 40px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player.playing > .playbar > .playfill { animation: none; }
+}
+
 .center {
   display: flex;
   flex-flow: column nowrap;
@@ -214,6 +257,22 @@ body {
 }
 
 .options > div {
+  font-size: 0.875em;
+}
+
+.options > details {
+  grid-column: span 2;
+  margin: 0px;
+}
+
+.suboptions {
+  margin: 0.8em 0px 0.3em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.suboptions > div {
   font-size: 0.875em;
 }
 

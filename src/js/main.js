@@ -74,6 +74,9 @@ function init() {
 
   document.querySelector('.clearsave').addEventListener('click', clearProgress);
 
+  document.querySelector('.left.sort.player').addEventListener('click', () => togglePlay('left'));
+  document.querySelector('.right.sort.player').addEventListener('click', () => togglePlay('right'));
+
   /** Define keyboard controls (up/down/left/right vimlike k/j/h/l). */
   document.addEventListener('keypress', (ev) => {
     /** If sorting is in progress. */
@@ -258,6 +261,63 @@ function start() {
   });
 }
 
+/** Audio player. One Audio object is shared by both cards, and it only gets a source when play is pressed. */
+let audioPlayer = null;
+let audioSide   = '';   // Card ('left'/'right') the audio is currently loaded for.
+let audioFiles  = {};   // Audio filename of the song shown on each card.
+
+/**
+ * Plays or pauses the preview of the song on one side.
+ *
+ * @param {'left'|'right'} side
+ */
+function togglePlay(side) {
+  if (!audioFiles[side]) return;
+
+  if (!audioPlayer) {
+    audioPlayer = new Audio();
+    audioPlayer.preload = 'none';
+    audioPlayer.addEventListener('timeupdate', () => {
+      if (!audioSide || !audioPlayer.duration) return;
+      document.querySelector(`.${audioSide}.sort.player .playfill`).style.width = `${audioPlayer.currentTime * 100 / audioPlayer.duration}%`;
+    });
+    audioPlayer.addEventListener('ended', stopAudio);
+  }
+
+  const player = document.querySelector(`.${side}.sort.player`);
+
+  if (audioSide === side && !audioPlayer.paused) {
+    audioPlayer.pause();
+    player.classList.remove('playing');
+    player.querySelector('.playbtn').innerHTML = '&#9654;';
+    return;
+  }
+
+  if (audioSide !== side) {
+    stopAudio();
+    audioSide = side;
+    audioPlayer.src = audioRoot + audioFiles[side];
+  }
+  audioPlayer.play().catch(stopAudio);
+  player.classList.add('playing');
+  player.querySelector('.playbtn').innerHTML = '&#10074;&#10074;';
+}
+
+/** Stops the audio and resets both players. */
+function stopAudio() {
+  if (audioPlayer) {
+    audioPlayer.pause();
+    audioPlayer.removeAttribute('src');
+    audioPlayer.load();
+  }
+  audioSide = '';
+  document.querySelectorAll('.sort.player').forEach(el => {
+    el.classList.remove('playing');
+    el.querySelector('.playbtn').innerHTML = '&#9654;';
+    el.querySelector('.playfill').style.width = '0%';
+  });
+}
+
 /** Displays the current state of the sorter. */
 function display() {
   const percent         = Math.floor(sortedNo * 100 / totalBattles);
@@ -277,6 +337,11 @@ function display() {
 
   document.querySelector('.left.sort.text').innerHTML = charNameDisp(leftChar);
   document.querySelector('.right.sort.text').innerHTML = charNameDisp(rightChar);
+
+  stopAudio();
+  audioFiles = { left: leftChar.audio, right: rightChar.audio };
+  document.querySelector('.left.sort.player').style.display = leftChar.audio ? 'flex' : 'none';
+  document.querySelector('.right.sort.player').style.display = rightChar.audio ? 'flex' : 'none';
 
   /** Autopick if choice has been given. */
   if (choices.length !== battleNo - 1) {
@@ -448,6 +513,7 @@ function progressBar(indicator, percentage) {
  * Shows the result of the sorter.
  */
 function result() {
+  stopAudio();
   document.querySelectorAll('.finished.button').forEach(el => el.style.display = 'block');
   document.querySelector('.time.taken').style.display = 'block';
   
@@ -630,8 +696,15 @@ function populateOptions() {
   options.forEach(opt => {
     if ('sub' in opt) {
       optList.insertAdjacentHTML('beforeend', optInsertLarge(opt.name, opt.key, opt.tooltip, opt.checked));
-      opt.sub.forEach((subopt, subindex) => {
-        optList.insertAdjacentHTML('beforeend', optInsert(subopt.name, `${opt.key}-${subindex}`, subopt.tooltip, subopt.checked, opt.checked === false));
+      /** Suboptions are grouped by release type in collapsible sections. The indexes stay the same. */
+      [['single', 'Singles'], ['album', 'Albums']].forEach(([type, title]) => {
+        const subs = opt.sub.map((subopt, subindex) => ({ subopt, subindex })).filter(sub => (sub.subopt.type || 'single') === type);
+        if (!subs.length) return;
+        optList.insertAdjacentHTML('beforeend', `<details class="subgroup"><summary>${title} (${subs.length})</summary><div class="suboptions"></div></details>`);
+        const subList = optList.lastElementChild.querySelector('.suboptions');
+        subs.forEach(({ subopt, subindex }) => {
+          subList.insertAdjacentHTML('beforeend', optInsert(subopt.name, `${opt.key}-${subindex}`, subopt.tooltip, subopt.checked, opt.checked === false));
+        });
       });
       optList.insertAdjacentHTML('beforeend', '<hr>');
 

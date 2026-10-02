@@ -1,5 +1,5 @@
 # Takane no Nadeshiko Song Sorter
-A fan-made song sorter for Takane no Nadeshiko, built on top of [charasort](https://github.com/execfera/charasort/) by Frelia (@execfera). Cover images go in `src/assets/chars/` (600px x 600px), and song data (Japanese title, romanized title, cover and release) is in `src/js/data/2026-10-02.js`. It must be served over HTTP (e.g. GitHub Pages) for the images to load.
+A fan-made song sorter for Takane no Nadeshiko, built on top of [charasort](https://github.com/execfera/charasort/) by Frelia (@execfera). Cover images go in `src/assets/chars/` (600px x 600px), and song data (Japanese title, romanized title, cover and release) is in `src/js/data/2026-10-02.js`. Each song has a 30 second preview in `src/assets/audio/` (set with the `audio` field in the song data, root in `audioRoot` of `src/js/data.js`), which is only downloaded when the play button is pressed. Release filters are grouped by `type` (`single` or `album`) in the data. It must be served over HTTP (e.g. GitHub Pages) for the images to load.
 
 ---
 

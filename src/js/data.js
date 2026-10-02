@@ -21,3 +21,8 @@ let dataSetVersion = '';
  * Image root, will be appended to the start of every image URL.
  */
 const imageRoot = 'src/assets/chars/';
+
+/**
+ * Audio root, will be appended to the start of every audio filename (30 second previews, only loaded when play is pressed).
+ */
+const audioRoot = 'src/assets/audio/';
