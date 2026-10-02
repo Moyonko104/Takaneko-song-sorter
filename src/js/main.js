@@ -117,6 +117,7 @@ function init() {
   }
 
   setLatestDataset();
+  setBackground();
 
   /** Decode query string if available. */
   if (window.location.search.slice(1) !== '') decodeQuery();

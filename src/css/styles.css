@@ -6,6 +6,115 @@ body {
   min-height: 100vh;
 }
 
+/* Backgrounds (see backgrounds.js) */
+
+.background {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.background.loaded {
+  opacity: 1;
+}
+
+.bganim {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bganim > div {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Text outside the white cards gets a box when there is a background image. */
+.hasbg .filters, .hasbg .info, .hasbg .time.taken {
+  padding: 0.8em;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 10px;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.hasbg .info {
+  padding: 1.2em 1em;
+}
+
+.hasbg .button {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.hasbg .button:hover {
+  background-color: #e1759c;
+}
+
+/* globos */
+
+.globos > div {
+  left: var(--x);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation-name: globo-sube;
+}
+
+.globos > div::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 1px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes globo-sube {
+  0%   { transform: translate(0px, 105vh); opacity: 0; }
+  10%  { opacity: 0.85; }
+  50%  { transform: translate(var(--sway), 50vh); }
+  90%  { opacity: 0.85; }
+  100% { transform: translate(0px, -25vh); opacity: 0; }
+}
+
+/* telas */
+
+.telas > div {
+  top: var(--y);
+  background-color: #2b2f4f;
+  border-radius: 2px 40% 2px 40%;
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.15);
+  animation-name: tela-vuela;
+}
+
+@keyframes tela-vuela {
+  0%   { transform: translate(105vw, 0px) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.8; }
+  50%  { transform: translate(45vw, calc(var(--fall) * 0.4 - 4vh)) rotate(calc(var(--rot) * 0.5)); }
+  90%  { opacity: 0.8; }
+  100% { transform: translate(-15vw, var(--fall)) rotate(var(--rot)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bganim { display: none; }
+}
+
 .title {
   padding: 1em 0.5em;
   text-align: center;
