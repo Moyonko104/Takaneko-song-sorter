@@ -1,0 +1,99 @@
+<html>
+
+<head>
+  <link rel="shortcut icon" href="src/assets/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="src/assets/favicon.ico" type="image/x-icon">
+  <meta charset="utf-8">
+  <meta name="og:site_name" content="Takane no Nadeshiko Song Sorter">
+  <meta name="og:description" content="A simple website for sorting Takane no Nadeshiko songs in a formatted list.">
+  <!-- og:image must be an absolute URL. Replace USER and REPO with your GitHub username and repository name after publishing. -->
+  <meta name="og:image" content="https://USER.github.io/REPO/src/assets/defaultL.jpg">
+  <title>Takane no Nadeshiko Song Sorter</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="src/css/reset.css">
+  <link rel="stylesheet" type="text/css" href="src/css/styles.css">
+
+  <script src="src/js/data.js"></script>
+  <script src="src/js/data/2026-10-02.js"></script>
+
+  <script src="src/js/html2canvas.min.js"></script>
+  <script src="src/js/lz-string.min.js"></script>
+  <script src="src/js/seedrandom.min.js"></script>
+  <script src="src/js/main.js"></script>
+</head>
+
+<body>
+<div class="title">
+    <h1>Takane no Nadeshiko</h1>
+    <h2>Song Sorter</h2>
+</div>
+
+<div class="container">
+
+    <div class="progress">
+        <span class="progressbattle"></span>
+        <div class="progressbar">
+            <div class="progressfill"><span class="progresstext"></span></div>
+        </div>
+    </div>
+
+    <div class="sorter">
+        <div class="left card">
+            <img src="src/assets/defaultL.jpg" class="left sort image">
+            <div class="left sort text"><p></p></div>
+        </div>
+
+        <div class="center">
+            <div class="starting start button">Click to Start!</div>
+            <div class="starting load button">Load <span></span></div>
+
+            <div class="loading button"><div></div><span>Loading...</span></div>
+
+            <div class="sorting tie button">Tie</div>
+            <div class="sorting undo button">Undo</div>
+            <div class="sorting save button">Save Progress</div>
+
+            <div class="finished save button">Generate Result URL</div>
+            <div class="finished getimg button">Generate Image</div>
+            <div class="finished list button">Generate Text List</div>
+        </div>
+
+        <div class="right card">
+            <img src="src/assets/defaultR.jpg" class="right sort image">
+            <div class="right sort text"><p></p></div>
+        </div>
+    </div>
+
+    <div class="options"></div>
+    <div class="time taken"></div>
+    <div class="results"></div>
+
+    <div class="info">
+        <a href="https://github.com/execfera/charasort/">Source Code</a> | <a class="clearsave">Clear Save Data</a>
+        
+        <br><br>
+
+        <p>Sorter for Takane no Nadeshiko songs. Pick your releases, and hit the Start button.</p>
+        <p><strong>Certain options have details that you can hover to read.</strong></p>
+        <p>Click on the song you like better from the two, or tie them if you like them equally or don't know them.</p>
+        <p>Depending on how many releases you pick, you'll get up to 189 picks, so set aside a cup of tea for this.</p>
+
+        <br><br>
+
+        <p>Keyboard controls during sorting: H/LeftArrow (pick left) J/DownArrow (undo) K/UpArrow (tie) L/RightArrow (pick right) S (save progress).</p>
+        <p>Before sorting: S/Enter (start sorting) L (load progress).
+        <p>1/2/3 always correspond to the first/second/third buttons.</p>
+        
+        <br><br>
+
+        <p>Fan-made sorter. All song titles and cover images belong to their respective owners. Based on <a href="https://github.com/execfera/charasort/">charasort</a> by Frelia (@execfera).</p>
+
+        <br><br>
+
+        <p>October 2nd, 2026 - Song sorter created.</p>
+    </div>
+</div>
+</body>
+
+</html>
