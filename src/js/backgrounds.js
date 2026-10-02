@@ -5,12 +5,13 @@
  *
  * img:   Image filename.
  * anim:  Key of bgAnimations.
+ * theme: Name of the page style for this image (.tema-<theme> in styles.css).
  * veil:  Optional color laid over the image so it doesn't fight with the page.
  */
 const backgroundRoot = 'src/assets/backgrounds/';
 const backgrounds = [
-  { img: 'lago.webp',     anim: 'globos', veil: 'rgba(255, 255, 255, 0.15)' },
-  { img: 'banderas.webp', anim: 'telas' },
+  { img: 'lago.webp',     anim: 'globos', theme: 'lago', veil: 'rgba(255, 255, 255, 0.15)' },
+  { img: 'banderas.webp', anim: 'telas',  theme: 'banderas' },
 ];
 
 /**
@@ -39,12 +40,12 @@ const bgAnimations = {
     count: 14,
     make: (el) => {
       el.style.setProperty('--y', `${Math.random() * 90}vh`);
-      el.style.setProperty('--fall', `${(Math.random() - 0.3) * 30}vh`);
-      el.style.setProperty('--rot', `${(Math.random() - 0.5) * 360}deg`);
-      el.style.width = `${30 + Math.random() * 40}px`;
-      el.style.height = `${10 + Math.random() * 14}px`;
-      el.style.animationDuration = `${14 + Math.random() * 12}s`;
-      el.style.animationDelay = `-${Math.random() * 26}s`;
+      el.style.setProperty('--sway', `${10 + Math.random() * 30}px`);
+      el.style.setProperty('--tilt', `${5 + Math.random() * 10}deg`);
+      el.style.width = `${90 + Math.random() * 90}px`;
+      el.style.height = `${6 + Math.random() * 8}px`;
+      el.style.animationDuration = `${12 + Math.random() * 10}s`;
+      el.style.animationDelay = `-${Math.random() * 22}s`;
     }
   }
 };
@@ -64,7 +65,7 @@ function setBackground() {
     const veil = currentBackground.veil ? `linear-gradient(${currentBackground.veil}, ${currentBackground.veil}), ` : '';
     bg.style.backgroundImage = `${veil}url(${backgroundRoot}${currentBackground.img})`;
     bg.classList.add('loaded');
-    document.body.classList.add('hasbg');
+    document.body.classList.add('hasbg', `tema-${currentBackground.theme}`);
   };
   image.src = backgroundRoot + currentBackground.img;
 
