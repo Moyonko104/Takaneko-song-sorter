@@ -94,7 +94,6 @@ body {
 }
 
 .card {
-  align-self: start;
   padding: 10px;
   text-align: center;
   background-color: #FFFFFF;
@@ -113,19 +112,27 @@ body {
 
 .card > .text {
   display: none;
-  min-height: 4em;
 }
 
 .card > .text > p {
-  margin: 0.6em 5px 0.2em;
-  font-size: 0.9em;
-  line-height: 1.5em;
+  margin: 0.6em 5px 0.1em;
+  font-size: 1.25em;
+  font-weight: 600;
+  line-height: 1.3em;
 }
 
-.card > .text > .romaji {
+.card > .text > .jp {
   margin-top: 0px;
-  font-size: 0.75em;
+  font-size: 1em;
+  font-weight: 400;
   color: #777777;
+}
+
+.card > .text > .album {
+  margin-top: 0.4em;
+  font-size: 0.8em;
+  font-weight: 400;
+  color: #888888;
 }
 
 .center {
@@ -198,13 +205,12 @@ body {
 }
 
 .options {
-  margin: 1.5em auto 1em;
+  margin: 1em auto;
   display: grid;
   text-align: left;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
-  width: 90%;
-  max-width: 500px;
+  width: 100%;
 }
 
 .options > div {
@@ -213,6 +219,44 @@ body {
 
 input[type=checkbox] {
   accent-color: #e1759c;
+}
+
+details {
+  margin: 1em auto 0px;
+}
+
+summary {
+  text-align: center;
+  font-size: 0.875em;
+  font-weight: bold;
+  color: #2f9bc4;
+  list-style: none;
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::before {
+  content: '\25B8  ';
+}
+
+details[open] > summary::before {
+  content: '\25BE  ';
+}
+
+summary:hover {
+  color: #e1759c;
+}
+
+.filters {
+  width: 90%;
+  max-width: 520px;
+}
+
+.info summary {
+  font-size: 1.075em;
 }
 
 label {
@@ -245,12 +289,12 @@ label:hover {
 
 .results {
   font-size: 0.8em;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: column;
+  gap: 6px 12px;
   width: 90%;
-  max-width: 700px;
+  max-width: 1000px;
   margin: 1em auto 2em;
   padding: 15px;
   background-color: #FFFFFF;
@@ -264,7 +308,6 @@ label:hover {
 
 .result {
   display: grid;
-  width: 100%;
   grid-template-columns: 40px 1fr;
   border: 1px solid #77c1dc;
   border-radius: 6px;
@@ -274,6 +317,7 @@ label:hover {
 
 .result.head {
   display: block;
+  grid-column: 1 / -1;
   margin-bottom: 6px;
   border: none;
   background-color: transparent;
@@ -292,19 +336,29 @@ label:hover {
 }
 
 .result > .right {
-  padding: 6px 10px;
+  padding: 5px 10px;
   border-left: 1px solid #77c1dc;
   text-align: left;
+  line-height: 1.3em;
 }
 
 .result > .right > span {
   display: block;
 }
 
-.result > .right > .romaji {
-  margin-top: 2px;
-  font-size: 0.85em;
+.result > .right > span:first-child {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.result > .right > .jp {
+  font-size: 0.9em;
   color: #777777;
+}
+
+.result > .right > .album {
+  font-size: 0.75em;
+  color: #888888;
 }
 
 .info {
@@ -345,7 +399,9 @@ a:hover {
     grid-column: 1 / 3;
   }
 
-  .card > .text {
-    min-height: 7.5em;
+  .results {
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+    grid-template-rows: none !important;  /* overrides the row count set in main.js */
   }
 }

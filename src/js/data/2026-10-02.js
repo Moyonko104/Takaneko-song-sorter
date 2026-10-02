@@ -9,32 +9,32 @@ dataSet[dataSetVersion].options = [
     tooltip: "Check this to restrict to certain singles or albums.",
     checked: true,
     sub: [
-      { name: "僕らの青 (Bokura no Ao)", tooltip: "Released on 2026-08-12", key: "bokura-no-ao" },
-      { name: "ハートブーケ (Heart Bouquet)", tooltip: "Released on 2026-06-07", key: "heart-bouquet" },
-      { name: "生きてりゃいい (Ikiterya Ii)", tooltip: "Released on 2026-05-13", key: "ikiterya-ii" },
-      { name: "私は、わたしの事が好き。 (Watashiwa Watashino Kotoga Suki)", tooltip: "Released on 2026-04-15", key: "watashi-wa-watashi" },
-      { name: "世界は恋に落ちている (Sekai wa Koi ni Ochiteiru)", tooltip: "Released on 2026-03-05", key: "sekai-wa-koi" },
-      { name: "見上げるたびに、恋をする。 (Miageru Tabi ni, Koi wo Suru.)", tooltip: "Released on 2025-12-17", key: "miageru-tabi-ni" },
-      { name: "病名恋ワズライ (Byoumei Koiwazurai)", tooltip: "Released on 2025-11-21", key: "byoumei-koiwazurai" },
-      { name: "メランコリックハニー (Melancholic Honey)", tooltip: "Released on 2025-04-30", key: "melancholic-honey" },
-      { name: "小悪魔だってかまわない! (Koakuma datte Kamawanai!)", tooltip: "Released on 2025-02-09", key: "koakuma-datte" },
+      { name: "Bokura no Ao (僕らの青)", tooltip: "Released on 2026-08-12", key: "bokura-no-ao" },
+      { name: "Heart Bouquet (ハートブーケ)", tooltip: "Released on 2026-06-07", key: "heart-bouquet" },
+      { name: "Ikiterya Ii (生きてりゃいい)", tooltip: "Released on 2026-05-13", key: "ikiterya-ii" },
+      { name: "Watashiwa Watashino Kotoga Suki (私は、わたしの事が好き。)", tooltip: "Released on 2026-04-15", key: "watashi-wa-watashi" },
+      { name: "Sekai wa Koi ni Ochiteiru (世界は恋に落ちている)", tooltip: "Released on 2026-03-05", key: "sekai-wa-koi" },
+      { name: "Miageru Tabi ni, Koi wo Suru. (見上げるたびに、恋をする。)", tooltip: "Released on 2025-12-17", key: "miageru-tabi-ni" },
+      { name: "Byoumei Koiwazurai (病名恋ワズライ)", tooltip: "Released on 2025-11-21", key: "byoumei-koiwazurai" },
+      { name: "Melancholic Honey (メランコリックハニー)", tooltip: "Released on 2025-04-30", key: "melancholic-honey" },
+      { name: "Koakuma datte Kamawanai! (小悪魔だってかまわない!)", tooltip: "Released on 2025-02-09", key: "koakuma-datte" },
       { name: "LOVE ANTHEM", tooltip: "Released on 2024-09-09", key: "love-anthem" },
-      { name: "メイド☆至上主義 (Maid Shijou Shugi)", tooltip: "Released on 2024-05-12", key: "maid-shijou-shugi" },
-      { name: "推しの魔法 (Oshi no Mahou)", tooltip: "Released on 2024-03-25", key: "oshi-no-mahou" },
-      { name: "美しく生きろ／恋を知った世界 (Utsukushiku Ikiro / Koi wo Shitta Sekai)", tooltip: "Released on 2024-02-21", key: "utsukushiku-ikiro" },
-      { name: "17歳 (17-sai)", tooltip: "Released on 2023-09-09", key: "17sai" },
-      { name: "すきっちゅーの！ (Sukicchuu no!)", tooltip: "Released on 2023-09-03", key: "sukicchuu-no" },
-      { name: "月曜日の憂鬱 (Getsuyoubi no Yuuutsu)", tooltip: "Released on 2023-07-23", key: "getsuyoubi-no-yuuutsu" },
-      { name: "ヒロインは平均以下。 (Heroine wa Heikin Ika)", tooltip: "Released on 2023-07-15", key: "heroine-wa-heikin-ika" },
-      { name: "決戦スピリット (Kessen Spirit)", tooltip: "Released on 2023-07-09", key: "kessen-spirit" },
-      { name: "初恋のひと。 (Hatsukoi no Hito)", tooltip: "Released on 2023-07-04", key: "hatsukoi-no-hito" },
-      { name: "革命の女王 (Kakumei no Joou)", tooltip: "Released on 2023-04-04", key: "kakumei-no-joou" },
-      { name: "僕は君になれない (Boku wa Kimi ni Narenai)", tooltip: "Released on 2023-04-04", key: "boku-wa-kimi-ni-narenai" },
-      { name: "男の子の目的は何？ (Otokonoko no Mokuteki wa Nani?)", tooltip: "Released on 2023-03-20", key: "otokonoko-no-mokuteki" },
-      { name: "乙女どもよ。 (Otome Domo yo)", tooltip: "Released on 2023-02-04", key: "otome-domo-yo" },
-      { name: "可愛くてごめん (Kawaikute Gomen)", tooltip: "Released on 2023-01-27", key: "kawaikute-gomen" },
-      { name: "女の子は強い (Onnanoko wa Tsuyoi)", tooltip: "Released on 2022-12-26", key: "onnanoko-wa-tsuyoi" },
-      { name: "アンチファン (Anti Fan)", tooltip: "Released on 2022-10-01", key: "anti-fan" }
+      { name: "Maid Shijou Shugi (メイド☆至上主義)", tooltip: "Released on 2024-05-12", key: "maid-shijou-shugi" },
+      { name: "Oshi no Mahou (推しの魔法)", tooltip: "Released on 2024-03-25", key: "oshi-no-mahou" },
+      { name: "Utsukushiku Ikiro / Koi wo Shitta Sekai (美しく生きろ／恋を知った世界)", tooltip: "Released on 2024-02-21", key: "utsukushiku-ikiro" },
+      { name: "17-sai (17歳)", tooltip: "Released on 2023-09-09", key: "17sai" },
+      { name: "Sukicchuu no! (すきっちゅーの！)", tooltip: "Released on 2023-09-03", key: "sukicchuu-no" },
+      { name: "Getsuyoubi no Yuuutsu (月曜日の憂鬱)", tooltip: "Released on 2023-07-23", key: "getsuyoubi-no-yuuutsu" },
+      { name: "Heroine wa Heikin Ika (ヒロインは平均以下。)", tooltip: "Released on 2023-07-15", key: "heroine-wa-heikin-ika" },
+      { name: "Kessen Spirit (決戦スピリット)", tooltip: "Released on 2023-07-09", key: "kessen-spirit" },
+      { name: "Hatsukoi no Hito (初恋のひと。)", tooltip: "Released on 2023-07-04", key: "hatsukoi-no-hito" },
+      { name: "Kakumei no Joou (革命の女王)", tooltip: "Released on 2023-04-04", key: "kakumei-no-joou" },
+      { name: "Boku wa Kimi ni Narenai (僕は君になれない)", tooltip: "Released on 2023-04-04", key: "boku-wa-kimi-ni-narenai" },
+      { name: "Otokonoko no Mokuteki wa Nani? (男の子の目的は何？)", tooltip: "Released on 2023-03-20", key: "otokonoko-no-mokuteki" },
+      { name: "Otome Domo yo (乙女どもよ。)", tooltip: "Released on 2023-02-04", key: "otome-domo-yo" },
+      { name: "Kawaikute Gomen (可愛くてごめん)", tooltip: "Released on 2023-01-27", key: "kawaikute-gomen" },
+      { name: "Onnanoko wa Tsuyoi (女の子は強い)", tooltip: "Released on 2022-12-26", key: "onnanoko-wa-tsuyoi" },
+      { name: "Anti Fan (アンチファン)", tooltip: "Released on 2022-10-01", key: "anti-fan" }
     ]
   }
 ];
@@ -43,6 +43,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "メランコリックハニー",
     romaji: "Melancholic Honey",
+    album: "Single (2025)",
     img: "melancholic-honey.jpg",
     opts: {
       release: ["melancholic-honey"]
@@ -51,6 +52,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "病名恋ワズライ",
     romaji: "Byoumei Koiwazurai",
+    album: "Single (2025)",
     img: "byoumei-koiwazurai.jpg",
     opts: {
       release: ["byoumei-koiwazurai"]
@@ -59,6 +61,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "僕らの青",
     romaji: "Bokura no Ao",
+    album: "Single (2026)",
     img: "bokura-no-ao.jpg",
     opts: {
       release: ["bokura-no-ao"]
@@ -67,6 +70,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "ハートブーケ",
     romaji: "Heart Bouquet",
+    album: "Single (2026)",
     img: "heart-bouquet.jpg",
     opts: {
       release: ["heart-bouquet"]
@@ -75,6 +79,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "生きてりゃいい",
     romaji: "Ikiterya Ii",
+    album: "Single (2026)",
     img: "ikiterya-ii.jpg",
     opts: {
       release: ["ikiterya-ii"]
@@ -83,6 +88,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "私は、わたしの事が好き。",
     romaji: "Watashiwa Watashino Kotoga Suki",
+    album: "Single (2026)",
     img: "watashi-wa-watashi.jpg",
     opts: {
       release: ["watashi-wa-watashi"]
@@ -91,6 +97,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "世界は恋に落ちている",
     romaji: "Sekai wa Koi ni Ochiteiru",
+    album: "Single (2026)",
     img: "sekai-wa-koi.jpg",
     opts: {
       release: ["sekai-wa-koi"]
@@ -99,6 +106,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "初恋のこたえ。",
     romaji: "Hatsukoi no Kotae",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -107,6 +115,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "ライフクエスト",
     romaji: "Life Quest",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -115,6 +124,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "花は誓いを忘れない",
     romaji: "Hana wa Chikai wo Wasurenai",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -123,6 +133,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "Cute for life",
     romaji: "Cute for life",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -131,6 +142,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "恋を知った世界",
     romaji: "Koi wo Shitta Sekai",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -139,6 +151,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "I'M YOUR IDOL",
     romaji: "I'M YOUR IDOL",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -147,6 +160,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "アイのウイルス",
     romaji: "Ai no Virus",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -155,6 +169,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "アイドル衣装",
     romaji: "Idol Ishou",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -163,6 +178,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "モテチェン！",
     romaji: "Mote Chen!",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -171,6 +187,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "いつか私がママになったら",
     romaji: "Itsuka Watashi ga Mama ni Nattara",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -179,6 +196,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "Overture",
     romaji: "Overture",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -187,6 +205,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "私より好きでいて",
     romaji: "Watashi yori Suki de Ite",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -195,6 +214,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "アドレナリンゲーム",
     romaji: "Adrenaline Game",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -203,6 +223,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "この世界は嘘でできている",
     romaji: "Kono Sekai wa Uso de Dekiteiru",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -211,6 +232,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "美しく生きろ",
     romaji: "Utsukushiku Ikiro",
+    album: "Album: Miageru Tabi ni, Koi wo Suru. (2025)",
     img: "miageru-tabi-ni.jpg",
     opts: {
       release: ["miageru-tabi-ni"]
@@ -219,6 +241,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "小悪魔だってかまわない!",
     romaji: "Koakuma datte Kamawanai!",
+    album: "Single (2025)",
     img: "koakuma-datte.jpg",
     opts: {
       release: ["koakuma-datte"]
@@ -227,6 +250,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "LOVE ANTHEM",
     romaji: "LOVE ANTHEM",
+    album: "Single (2024)",
     img: "love-anthem.jpg",
     opts: {
       release: ["love-anthem"]
@@ -235,6 +259,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "メイド☆至上主義",
     romaji: "Maid Shijou Shugi",
+    album: "Single (2024)",
     img: "maid-shijou-shugi.jpg",
     opts: {
       release: ["maid-shijou-shugi"]
@@ -243,6 +268,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "推しの魔法",
     romaji: "Oshi no Mahou",
+    album: "Single (2024)",
     img: "oshi-no-mahou.jpg",
     opts: {
       release: ["oshi-no-mahou"]
@@ -251,6 +277,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "可愛いって言われたい",
     romaji: "Kawaii tte Iwaretai",
+    album: "Single: Utsukushiku Ikiro / Koi wo Shitta Sekai (2024)",
     img: "utsukushiku-ikiro.jpg",
     opts: {
       release: ["utsukushiku-ikiro"]
@@ -259,6 +286,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "私は怪物",
     romaji: "Watashi wa Kaibutsu",
+    album: "Single: Utsukushiku Ikiro / Koi wo Shitta Sekai (2024)",
     img: "utsukushiku-ikiro.jpg",
     opts: {
       release: ["utsukushiku-ikiro"]
@@ -267,6 +295,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "17歳",
     romaji: "17-sai",
+    album: "Single (2023)",
     img: "17sai.jpg",
     opts: {
       release: ["17sai"]
@@ -275,6 +304,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "すきっちゅーの！",
     romaji: "Sukicchuu no!",
+    album: "Single (2023)",
     img: "sukicchuu-no.jpg",
     opts: {
       release: ["sukicchuu-no"]
@@ -283,6 +313,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "月曜日の憂鬱",
     romaji: "Getsuyoubi no Yuuutsu",
+    album: "Single (2023)",
     img: "getsuyoubi-no-yuuutsu.jpg",
     opts: {
       release: ["getsuyoubi-no-yuuutsu"]
@@ -291,6 +322,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "決戦スピリット",
     romaji: "Kessen Spirit",
+    album: "Single (2023)",
     img: "kessen-spirit.jpg",
     opts: {
       release: ["kessen-spirit"]
@@ -299,6 +331,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "初恋のひと。",
     romaji: "Hatsukoi no Hito",
+    album: "Single (2023)",
     img: "hatsukoi-no-hito.jpg",
     opts: {
       release: ["hatsukoi-no-hito"]
@@ -307,6 +340,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "ヒロインは平均以下。",
     romaji: "Heroine wa Heikin Ika",
+    album: "Single (2023)",
     img: "heroine-wa-heikin-ika.jpg",
     opts: {
       release: ["heroine-wa-heikin-ika"]
@@ -315,6 +349,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "革命の女王",
     romaji: "Kakumei no Joou",
+    album: "Single (2023)",
     img: "kakumei-no-joou.jpg",
     opts: {
       release: ["kakumei-no-joou"]
@@ -323,6 +358,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "僕は君になれない",
     romaji: "Boku wa Kimi ni Narenai",
+    album: "Single (2023)",
     img: "boku-wa-kimi-ni-narenai.jpg",
     opts: {
       release: ["boku-wa-kimi-ni-narenai"]
@@ -331,6 +367,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "男の子の目的は何？",
     romaji: "Otokonoko no Mokuteki wa Nani?",
+    album: "Single (2023)",
     img: "otokonoko-no-mokuteki.jpg",
     opts: {
       release: ["otokonoko-no-mokuteki"]
@@ -339,6 +376,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "乙女どもよ。",
     romaji: "Otome Domo yo",
+    album: "Single (2023)",
     img: "otome-domo-yo.jpg",
     opts: {
       release: ["otome-domo-yo"]
@@ -347,6 +385,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "可愛くてごめん",
     romaji: "Kawaikute Gomen",
+    album: "Single (2023)",
     img: "kawaikute-gomen.jpg",
     opts: {
       release: ["kawaikute-gomen"]
@@ -355,6 +394,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "女の子は強い",
     romaji: "Onnanoko wa Tsuyoi",
+    album: "Single (2022)",
     img: "onnanoko-wa-tsuyoi.jpg",
     opts: {
       release: ["onnanoko-wa-tsuyoi"]
@@ -363,6 +403,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "アンチファン",
     romaji: "Anti Fan",
+    album: "Single (2022)",
     img: "anti-fan.jpg",
     opts: {
       release: ["anti-fan"]
@@ -371,6 +412,7 @@ dataSet[dataSetVersion].characterData = [
   {
     name: "ユメムスビ",
     romaji: "Yume Musubi",
+    album: "Single: Anti Fan (2022)",
     img: "anti-fan.jpg",
     opts: {
       release: ["anti-fan"]

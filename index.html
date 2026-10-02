@@ -6,7 +6,8 @@
   <meta charset="utf-8">
   <meta name="og:site_name" content="Takane no Nadeshiko Song Sorter">
   <meta name="og:description" content="A simple website for sorting Takane no Nadeshiko songs in a formatted list.">
-  <meta name="og:image" content="https://Moyonko104.github.io/Takaneko-song-sorter/src/assets/defaultL.jpg">
+  <!-- og:image must be an absolute URL. Replace USER and REPO with your GitHub username and repository name after publishing. -->
+  <meta name="og:image" content="https://USER.github.io/REPO/src/assets/defaultL.jpg">
   <title>Takane no Nadeshiko Song Sorter</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
@@ -56,6 +57,7 @@
             <div class="finished save button">Generate Result URL</div>
             <div class="finished getimg button">Generate Image</div>
             <div class="finished list button">Generate Text List</div>
+            <div class="finished again button">Back to Start</div>
         </div>
 
         <div class="right card">
@@ -64,14 +66,20 @@
         </div>
     </div>
 
-    <div class="options"></div>
+    <details class="filters">
+        <summary>Filters</summary>
+        <div class="options"></div>
+    </details>
     <div class="time taken"></div>
     <div class="results"></div>
 
     <div class="info">
         <a href="https://github.com/execfera/charasort/">Source Code</a> | <a class="clearsave">Clear Save Data</a>
         
-        <br><br>
+        <details>
+        <summary>How to use &amp; keyboard controls</summary>
+
+        <br>
 
         <p>Sorter for Takane no Nadeshiko songs. Pick your releases, and hit the Start button.</p>
         <p><strong>Certain options have details that you can hover to read.</strong></p>
@@ -83,7 +91,8 @@
         <p>Keyboard controls during sorting: H/LeftArrow (pick left) J/DownArrow (undo) K/UpArrow (tie) L/RightArrow (pick right) S (save progress).</p>
         <p>Before sorting: S/Enter (start sorting) L (load progress).
         <p>1/2/3 always correspond to the first/second/third buttons.</p>
-        
+        </details>
+
         <br><br>
 
         <p>Fan-made sorter. All song titles and cover images belong to their respective owners. Based on <a href="https://github.com/execfera/charasort/">charasort</a> by Frelia (@execfera).</p>

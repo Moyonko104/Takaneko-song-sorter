@@ -68,6 +68,7 @@ function init() {
   document.querySelector('.sorting.save.button').addEventListener('click', () => saveProgress('Progress'));
   
   document.querySelector('.finished.save.button').addEventListener('click', () => saveProgress('Last Result'));
+  document.querySelector('.finished.again.button').addEventListener('click', () => location.href = `${location.protocol}//${sorterURL}`);
   document.querySelector('.finished.getimg.button').addEventListener('click', generateImage);
   document.querySelector('.finished.list.button').addEventListener('click', generateTextList);
 
@@ -265,7 +266,7 @@ function display() {
   const leftChar        = characterDataToSort[leftCharIndex];
   const rightChar       = characterDataToSort[rightCharIndex];
 
-  const charNameDisp = char => `<p>${char.name}</p>${char.romaji !== char.name ? `<p class="romaji">${char.romaji}</p>` : ''}`;
+  const charNameDisp = char => `<p>${char.romaji}</p>${char.romaji !== char.name ? `<p class="jp">${char.name}</p>` : ''}<p class="album">${char.album}</p>`;
 
   progressBar(`Battle No. ${battleNo}`, percent);
 
@@ -453,13 +454,13 @@ function result() {
   document.querySelectorAll('.sorting.button').forEach(el => el.style.display = 'none');
   document.querySelectorAll('.sort.text').forEach(el => el.style.display = 'none');
   document.querySelectorAll('.card').forEach(el => el.style.display = 'none');
-  document.querySelector('.options').style.display = 'none';
+  document.querySelector('.filters').style.display = 'none';
   document.querySelector('.info').style.display = 'none';
 
   const header = '<div class="result head">My Ranking</div>';
   const timeStr = `This sorter was completed on ${new Date(timestamp + timeTaken).toString()} and took ${msToReadableTime(timeTaken)}. <a href="${location.protocol}//${sorterURL}">Do another sorter?</a>`;
   const res = (char, num) => {
-    return `<div class="result"><div class="left">${num}</div><div class="right"><span>${char.name}</span>${char.romaji !== char.name ? `<span class="romaji">${char.romaji}</span>` : ''}</div></div>`;
+    return `<div class="result"><div class="left">${num}</div><div class="right"><span>${char.romaji}</span>${char.romaji !== char.name ? `<span class="jp">${char.name}</span>` : ''}<span class="album">${char.album}</span></div></div>`;
   }
 
   let rankNum       = 1;
@@ -470,6 +471,7 @@ function result() {
   const timeElem = document.querySelector('.time.taken');
 
   resultTable.innerHTML = header;
+  resultTable.style.gridTemplateRows = `repeat(${Math.ceil(characterDataToSort.length / 2) + 1}, auto)`;
   timeElem.innerHTML = timeStr;
 
   characterDataToSort.forEach((val, idx) => {
