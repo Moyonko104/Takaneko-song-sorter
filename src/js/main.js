@@ -82,11 +82,11 @@ function init() {
     /** If sorting is in progress. */
     if (timestamp && !timeTaken && !loading && choices.length === battleNo - 1) {
       switch(ev.key) {
-        case 's': case '3':                   saveProgress('Progress'); break;
-        case 'h': case 'ArrowLeft':           pick('left'); break;
-        case 'l': case 'ArrowRight':          pick('right'); break;
-        case 'k': case '1': case 'ArrowUp':   pick('tie'); break;
-        case 'j': case '2': case 'ArrowDown': undo(); break;
+        case 's': saveProgress('Progress'); break;
+        case 'h': pick('left'); break;
+        case 'l': pick('right'); break;
+        case 'k': pick('tie'); break;
+        case 'j': undo(); break;
         default: break;
       }
     }
@@ -98,10 +98,10 @@ function init() {
         case 's': case '3': generateTextList(); break;
         default: break;
       }
-    } else { // If sorting hasn't started yet.
+    } else if (!timestamp) { // If sorting hasn't started yet.
       switch(ev.key) {
-        case '1': case 's': case 'Enter': start(); break;
-        case '2': case 'l':               loadProgress(); break;
+        case 'Enter': start(); break;
+        case 'c':     loadProgress(); break;
         default: break;
       }
     }
@@ -560,7 +560,7 @@ function result() {
 
 /** Undo previous choice. */
 function undo() {
-  if (timeTaken) { return; }
+  if (timeTaken || choices.length === 0) { return; }
 
   choices = battleNo === battleNoPrev ? choices : choices.slice(0, -1);
 

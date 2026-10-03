@@ -153,9 +153,12 @@ body {
 .tema-llamas .options > hr { border-top-color: #c0213f; }
 .tema-llamas .progressbar { border-color: #c0213f; }
 .tema-llamas .progressfill { background-color: #d8586f; }
-.tema-llamas .result.head, .tema-llamas .result > .left { color: #c0213f; }
-.tema-llamas .result { background-color: #fbf2f4; border-color: #d9a0ab; }
-.tema-llamas .result > .right { border-left-color: #d9a0ab; }
+.tema-llamas .card, .tema-llamas .progress, .tema-llamas .results { background-color: #1c1c26; color: #e6e6ea; }
+.tema-llamas .card > .text > .jp, .tema-llamas .result > .right > .jp { color: #b9b9c4; }
+.tema-llamas .card > .text > .album, .tema-llamas .result > .right > .album { color: #9a9aa8; }
+.tema-llamas .result.head, .tema-llamas .result > .left { color: #e0415e; }
+.tema-llamas .result { background-color: #262633; border-color: #5a2a35; }
+.tema-llamas .result > .right { border-left-color: #5a2a35; }
 .tema-llamas .loading.button > div { background-color: #c0213f; }
 .tema-llamas .player > .playbtn { color: #c0213f; }
 .tema-llamas .player > .playbar { border-color: #c0213f; }
