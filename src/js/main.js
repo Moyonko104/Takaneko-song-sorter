@@ -91,7 +91,7 @@ function init() {
       }
     }
     /** If sorting has ended. */
-    else if (timeTaken && choices.length === battleNo - 1) {
+    else if (timeTaken) {
       switch(ev.key) {
         case 'k': case '1': saveProgress('Last Result'); break;
         case 'j': case '2': generateImage(); break;

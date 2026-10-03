@@ -11,7 +11,7 @@
 const backgroundRoot = 'src/assets/backgrounds/';
 const backgrounds = [
   { img: 'lago.webp',     anim: 'globos', theme: 'lago', veil: 'rgba(255, 255, 255, 0.15)' },
-  { img: 'banderas.webp', anim: 'telas',  theme: 'banderas' },
+  { img: 'llamas.webp',   anim: 'ascuas', theme: 'llamas' },
 ];
 
 /**
@@ -36,16 +36,18 @@ const bgAnimations = {
       el.style.animationDelay = `-${Math.random() * 30}s`;
     }
   },
-  telas: {
-    count: 14,
+  ascuas: {
+    count: 40,
     make: (el) => {
-      el.style.setProperty('--y', `${Math.random() * 90}vh`);
-      el.style.setProperty('--sway', `${10 + Math.random() * 30}px`);
-      el.style.setProperty('--tilt', `${5 + Math.random() * 10}deg`);
-      el.style.width = `${90 + Math.random() * 90}px`;
-      el.style.height = `${6 + Math.random() * 8}px`;
-      el.style.animationDuration = `${12 + Math.random() * 10}s`;
-      el.style.animationDelay = `-${Math.random() * 22}s`;
+      const ash = Math.random() < 0.35;
+      const size = ash ? 4 + Math.random() * 5 : 3 + Math.random() * 5;
+      el.className = ash ? 'ceniza' : 'brasa';
+      el.style.setProperty('--x', `${Math.random() * 98}vw`);
+      el.style.setProperty('--sway', `${(Math.random() - 0.5) * (ash ? 160 : 90)}px`);
+      el.style.width = `${size}px`;
+      el.style.height = `${size}px`;
+      el.style.animationDuration = `${(ash ? 14 : 7) + Math.random() * (ash ? 10 : 7)}s`;
+      el.style.animationDelay = `-${Math.random() * 20}s`;
     }
   }
 };
