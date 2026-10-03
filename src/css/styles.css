@@ -301,28 +301,29 @@ body {
 .card > .player {
   display: none;
   align-items: center;
+  height: 40px;
   margin: 0.8em 5px 0.2em;
   cursor: pointer;
 }
 
 .player > .playbtn {
-  width: 28px;
-  font-size: 0.8em;
+  width: 36px;
+  font-size: 1.3em;
   color: #d0608a;
 }
 
 .player > .playbar {
   flex: 1;
-  height: 12px;
-  padding: 2px;
+  height: 20px;
+  padding: 3px;
   border: 1px solid #77c1dc;
-  border-radius: 10px;
+  border-radius: 14px;
 }
 
 .player > .playbar > .playfill {
   height: 100%;
   width: 0%;
-  border-radius: 8px;
+  border-radius: 10px;
   background-color: #a9dcee;
   transition: width 0.3s linear;
 }
@@ -437,6 +438,18 @@ body {
 
 .suboptions > div {
   font-size: 0.875em;
+}
+
+.suboptions label {
+  display: block;
+  padding-left: 1.7em;
+  text-indent: -1.7em;
+}
+
+.jpname {
+  display: inline-block;
+  text-indent: 0px;
+  font-size: 0.85em;
 }
 
 input[type=checkbox] {

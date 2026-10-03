@@ -684,7 +684,10 @@ function setLatestDataset() {
 function populateOptions() {
   const optList = document.querySelector('.options');
   const optInsert = (name, id, tooltip, checked = true, disabled = false) => {
-    return `<div><label title="${tooltip?tooltip:name}"><input id="cb-${id}" type="checkbox" ${checked?'checked':''} ${disabled?'disabled':''}> ${name}</label></div>`;
+    /** Japanese title in brackets goes below the romanized one. */
+    const jp = name.match(/^(.*?)\s*\(([^()]*[^\x00-\x7F][^()]*)\)$/);
+    const text = jp ? `${jp[1]}<br><span class="jpname">${jp[2]}</span>` : name;
+    return `<div><label title="${tooltip?tooltip:name}"><input id="cb-${id}" type="checkbox" ${checked?'checked':''} ${disabled?'disabled':''}> ${text}</label></div>`;
   };
   const optInsertLarge = (name, id, tooltip, checked = true) => {
     return `<div class="large option"><label title="${tooltip?tooltip:name}"><input id="cbgroup-${id}" type="checkbox" ${checked?'checked':''}> ${name}</label></div>`;
