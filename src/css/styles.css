@@ -621,18 +621,67 @@ a:hover {
     font-size: 1.3em;
   }
 
+  /* Cards stacked: one over the other, with room for fingers. */
   .sorter {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    width: 94%;
   }
 
-  .sorter > .right {
-    grid-column: 2 / 3;
+  .sorter > .left, .sorter > .right, .sorter > .center {
+    grid-column: 1 / 2;
   }
 
   .sorter > .center {
     order: 3;
-    grid-column: 1 / 3;
   }
+
+  .card > .image {
+    max-width: 230px;
+  }
+
+  .card > .player {
+    height: 56px;
+  }
+
+  .player > .playbtn {
+    width: 44px;
+    font-size: 1.6em;
+  }
+
+  .player > .playbar {
+    height: 26px;
+    border-radius: 18px;
+  }
+
+  .player > .playbar > .playfill {
+    border-radius: 14px;
+  }
+
+  .button, .player {
+    touch-action: manipulation;
+  }
+
+  .hasbg .button {
+    padding: 15px 10px;
+    font-size: 1em;
+  }
+
+  .hasbg .info {
+    width: 92%;
+    padding: 0.4em 0.6em;
+    font-size: 0.9em;
+  }
+
+  /* No blur on phones (it is costly with things moving behind), the boxes are more opaque instead. */
+  .hasbg .filters, .hasbg .info, .hasbg .time.taken, .hasbg .button {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .tema-lago .filters, .tema-lago .info, .tema-lago .time.taken { background-color: rgba(255, 243, 230, 0.78); }
+  .tema-lago .button { background-color: rgba(255, 244, 232, 0.72); }
+  .tema-llamas .filters, .tema-llamas .info, .tema-llamas .time.taken { background-color: rgba(22, 22, 30, 0.8); }
+  .tema-llamas .button { background-color: rgba(22, 22, 30, 0.72); }
 
   .results {
     grid-template-columns: 1fr;
