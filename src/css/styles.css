@@ -14,10 +14,12 @@ body {
   left: 0px;
   width: 100%;
   height: 100%;
+  height: 100lvh;
   z-index: -2;
   background-size: cover;
   background-position: center;
   opacity: 0;
+  will-change: transform;
   transition: opacity 1s;
 }
 
@@ -31,6 +33,7 @@ body {
   left: 0px;
   width: 100%;
   height: 100%;
+  height: 100lvh;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
@@ -64,7 +67,7 @@ body {
 }
 
 .hasbg .filters {
-  padding: 0.4em 0.8em;
+  padding: 0.7em 0.8em;
 }
 
 .hasbg .button {
@@ -130,11 +133,11 @@ body {
 .tema-lago .title { background-color: #fde9dc; }
 .tema-lago .title h2 { color: #6b5346; }
 .tema-lago .card, .tema-lago .progress, .tema-lago .results { background-color: #fffaf4; }
-.tema-lago .button { background-color: rgba(255, 244, 232, 0.4); color: #c9567f; }
-.tema-lago .button:hover { background-color: #e1759c; color: #FFFFFF; }
-.tema-lago .filters, .tema-lago .info, .tema-lago .time.taken { background-color: rgba(255, 243, 230, 0.45); }
-.tema-lago a, .tema-lago summary { color: #c9567f; }
-.tema-lago a:hover, .tema-lago summary:hover, .tema-lago label:hover { color: #e1759c; }
+.tema-lago .button { background-color: rgba(255, 244, 232, 0.55); border-color: #c9567f; color: #b0446c; }
+.tema-lago .button:hover { background-color: #c9567f; color: #FFFFFF; }
+.tema-lago .filters, .tema-lago .info, .tema-lago .time.taken { background-color: rgba(255, 243, 230, 0.65); }
+.tema-lago a, .tema-lago summary { color: #b0446c; }
+.tema-lago a:hover, .tema-lago summary:hover, .tema-lago label:hover { color: #d0608a; }
 .tema-lago .result { background-color: #fff3e8; border-color: #f0c2a8; }
 .tema-lago .result > .right { border-left-color: #f0c2a8; }
 .tema-lago .player > .playbar { border-color: #f0a8b8; }
@@ -144,9 +147,9 @@ body {
 .tema-llamas .title { background-color: #1c1c26; }
 .tema-llamas .title h1 { color: #e0415e; }
 .tema-llamas .title h2 { color: #dddde3; }
-.tema-llamas .button { background-color: rgba(22, 22, 30, 0.45); border-color: #c0213f; color: #f1d6db; }
+.tema-llamas .button { background-color: rgba(22, 22, 30, 0.55); border-color: #c0213f; color: #f1d6db; }
 .tema-llamas .button:hover { background-color: #c0213f; color: #FFFFFF; }
-.tema-llamas .filters, .tema-llamas .info, .tema-llamas .time.taken { background-color: rgba(22, 22, 30, 0.5); color: #e6e6ea; }
+.tema-llamas .filters, .tema-llamas .info, .tema-llamas .time.taken { background-color: rgba(22, 22, 30, 0.6); color: #e6e6ea; }
 .tema-llamas a, .tema-llamas summary { color: #ff8da1; }
 .tema-llamas a:hover, .tema-llamas summary:hover, .tema-llamas label:hover { color: #FFFFFF; }
 .tema-llamas input[type=checkbox] { accent-color: #c0213f; }
@@ -637,6 +640,66 @@ a:hover {
 
   .card > .image {
     max-width: 230px;
+  }
+
+  /* Once sorting starts, each card is the image on the left and the text on the right, so both cards fit on screen. */
+  .sorter.started .card {
+    display: grid;
+    grid-template-columns: 38% 1fr;
+    grid-template-rows: 1fr auto;
+    column-gap: 12px;
+    align-items: center;
+    text-align: left;
+  }
+
+  .sorter.started .card > .image {
+    grid-row: 1 / 3;
+    max-width: none;
+    margin: 0px;
+  }
+
+  .sorter.started .card > .text {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .sorter.started .card > .text > p {
+    margin: 0px 0px 0.1em;
+    font-size: 1.05em;
+  }
+
+  .sorter.started .card > .text > .jp {
+    font-size: 0.9em;
+  }
+
+  .sorter.started .card > .text > .album {
+    font-size: 0.75em;
+  }
+
+  .sorter.started .card > .player {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0.3em 0px 0px;
+  }
+
+  /* Buttons: the three sorting ones share a row. */
+  .center {
+    flex-flow: row wrap;
+    gap: 8px;
+  }
+
+  .center > .button {
+    flex: 1 1 100%;
+    margin-bottom: 0px;
+  }
+
+  .center > .sorting.button {
+    flex: 1 1 28%;
+  }
+
+  .hasbg .center > .sorting.button {
+    padding: 15px 4px;
+    font-size: 0.85em;
   }
 
   .card > .player {

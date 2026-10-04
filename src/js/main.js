@@ -258,6 +258,7 @@ function start() {
     document.querySelector('.loading.button').style.display = 'none';
     document.querySelectorAll('.sorting.button').forEach(el => el.style.display = 'block');
     document.querySelectorAll('.sort.text').forEach(el => el.style.display = 'block');
+    document.querySelector('.sorter').classList.add('started');
     display();
   });
 }
