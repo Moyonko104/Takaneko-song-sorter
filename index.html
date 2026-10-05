@@ -16,6 +16,7 @@
 
   <script src="src/js/data.js"></script>
   <script src="src/js/data/2026-10-02.js"></script>
+  <script src="src/js/data/2026-10-05.js"></script>
 
   <script src="src/js/html2canvas.min.js"></script>
   <script src="src/js/lz-string.min.js"></script>
@@ -51,6 +52,7 @@
         <div class="center">
             <div class="starting start button">Click to Start!</div>
             <div class="starting load button">Load <span></span></div>
+            <div class="starting mode button"></div>
 
             <div class="loading button"><div></div><span>Loading...</span></div>
 
@@ -68,6 +70,16 @@
             <img src="src/assets/defaultR.jpg" class="right sort image">
             <div class="right sort text"><p></p></div>
             <div class="right sort player"><span class="playbtn">&#9654;</span><div class="playbar"><div class="playfill"></div></div></div>
+        </div>
+    </div>
+
+    <div class="favscreen pickscreen">
+        <div class="favhint pickhint"></div>
+        <div class="favgrid pickgrid"></div>
+        <div class="pickbtns">
+            <div class="favcancel button">Back</div>
+            <div class="favskip button">Skip</div>
+            <div class="favdone button disabled">Continue</div>
         </div>
     </div>
 
@@ -90,10 +102,7 @@
         <p><strong>Certain options have details that you can hover to read.</strong></p>
         <p>Click on the song you like better from the two, or tie them if you like them equally or don't know them.</p>
         <p>Depending on how many releases you pick, you'll get up to 189 picks, so set aside a cup of tea for this.</p>
-
-        <br><br>
-
-        <p>Keyboard controls during sorting: H (pick left) J (undo) K (tie) L (pick right) S (save progress).</p>
+        <p>Before sorting, a grid lets you mark your favorite songs (from the oldest release to the newest). In Full ranking you can press Skip; if you mark favorites, they end up above the rest and you are never asked to compare a favorite with a song that isn't one. In Top 10 mode only your favorites are sorted, two at a time, and you get your Top 10.</p>
         <p>Before sorting: Enter (start sorting) C (load progress).
         <p>After sorting: 1/2/3 correspond to the first/second/third buttons (K/J/S also work).</p>
         </details>

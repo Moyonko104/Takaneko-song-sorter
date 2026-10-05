@@ -752,3 +752,146 @@ a:hover {
     grid-template-rows: none !important;  /* overrides the row count set in main.js */
   }
 }
+
+/* Favorites grid: one row per song (cover, title, play button). */
+.pickscreen {
+  display: none;
+  width: 90%;
+  max-width: 1050px;
+  margin: 0px auto;
+}
+
+.pickhint {
+  margin: 0px 0px 1em;
+  padding: 0.6em 1em;
+  text-align: center;
+  font-size: 0.9em;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.tema-lago .pickhint { background-color: rgba(255, 243, 230, 0.96); }
+.tema-llamas .pickhint { background-color: rgba(22, 22, 30, 0.96); color: #e6e6ea; }
+
+.pickgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 8px 12px;
+}
+
+.pickgrid .favrow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 5px 10px 5px 5px;
+  text-align: left;
+  border: 3px solid transparent;
+  cursor: pointer;
+}
+
+.favrow > .image {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  max-width: none;
+  margin: 0px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.favrow > .text { display: block; flex: 1; min-width: 0; }
+.favrow > .text > p { margin: 0px; font-size: 0.95em; line-height: 1.25em; }
+.favrow > .text > .album { margin-top: 0.15em; font-size: 0.7em; }
+
+/* Play button with a ring that fills while the preview plays. */
+.pickgrid .favrow > .player {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0px;
+  padding: 3px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-image: conic-gradient(#e1759c var(--p, 0%), rgba(225, 117, 156, 0.3) 0);
+}
+
+.favrow > .player > .playbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #fffaf4;
+  font-size: 0.95em;
+  line-height: 1;
+}
+
+.favrow > .player > .playbar { display: none; }
+
+.tema-llamas .pickgrid .favrow > .player { background-image: conic-gradient(#c0213f var(--p, 0%), rgba(192, 33, 63, 0.35) 0); }
+.tema-llamas .favrow > .player > .playbtn { background-color: #1c1c26; }
+
+.pickgrid .favrow.marked { border-color: #e1759c; background-color: #ffeef4; }
+.tema-llamas .pickgrid .favrow.marked { border-color: #c0213f; background-color: #2b2030; }
+
+.badge {
+  display: none;
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #FFFFFF;
+  background-color: #e1759c;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.tema-llamas .badge { background-color: #c0213f; }
+.card.marked > .badge { display: block; }
+
+.pickbtns {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1em;
+}
+
+.pickbtns .button {
+  flex: 0 1 220px;
+  margin: 0px;
+}
+
+.button.disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* The counter and the buttons of the favorites grid stay in view while scrolling. */
+.favscreen .pickhint { position: sticky; top: 0px; z-index: 5; }
+.favscreen .pickbtns { position: sticky; bottom: 8px; z-index: 5; }
+.tema-lago .favscreen .pickbtns .button { background-color: #fff4e8; }
+.tema-llamas .favscreen .pickbtns .button { background-color: #16161e; }
+
+@media all and (max-width: 600px) {
+  .pickscreen { width: 94%; }
+  .pickhint { padding: 0.4em 0.7em; font-size: 0.8em; }
+  .pickgrid { grid-template-columns: 1fr; grid-gap: 6px; }
+  .pickgrid .favrow { min-height: 0px; gap: 8px; padding: 3px 8px 3px 3px; }
+  .favrow > .image { width: 40px; height: 40px; }
+  .pickgrid .favrow > .player { width: 38px; height: 38px; }
+  .favrow > .player > .playbtn { width: 100%; font-size: 0.95em; }
+  .pickbtns .button { flex: 1 1 0px; }
+}

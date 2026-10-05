@@ -53,7 +53,26 @@ let totalBattles    = 0;
 let sorterURL       = window.location.host + window.location.pathname;
 let storedSaveType  = localStorage.getItem(`${sorterURL}_saveType`);
 
-/** Initialize script. */
+/**
+ * Sorting mode:
+ *   'full'  all songs, 1 vs 1.
+ *   'top10' only the favorites are sorted, and the first 10 are shown.
+ * In both modes a grid is shown first to mark favorites. In full mode they can be skipped, and when marked,
+ * a favorite always beats a song that isn't one (that question is never asked), so favorites end up above the rest.
+ */
+let sortMode   = 'full';
+let favStr     = '';      // String of '0' and '1', one per song (after filtering by release). Marks the favorites.
+let favDone    = false;   // True once the favorites grid has been answered (or skipped), or a save has been loaded.
+let favPicking = false;   // True while the favorites grid is open.
+let autoNo     = 0;       // Number of battles decided automatically (favorite vs not favorite) so far.
+let autoNoPrev = 0;
+let prevSet    = false;   // True once there is a snapshot to undo to.
+const modeNames = { full: 'Full ranking', top10: 'Top 10' };
+const modeInfo  = {
+  full:  'Sort every song, two at a time. You can mark favorites first, so they end up above the rest.',
+  top10: 'Mark your favorites, then sort only those two at a time and see your Top 10.'
+};
+
 function init() {
 
   /** Define button behavior. */
@@ -74,11 +93,21 @@ function init() {
 
   document.querySelector('.clearsave').addEventListener('click', clearProgress);
 
+  document.querySelector('.starting.mode.button').addEventListener('click', () => {
+    sortMode = sortMode === 'full' ? 'top10' : 'full';
+    setModeButton();
+  });
+  document.querySelector('.favcancel.button').addEventListener('click', favCancel);
+  document.querySelector('.favskip.button').addEventListener('click', favSkip);
+  document.querySelector('.favdone.button').addEventListener('click', favDone_);
+  setModeButton();
+
   document.querySelector('.left.sort.player').addEventListener('click', () => togglePlay('left'));
   document.querySelector('.right.sort.player').addEventListener('click', () => togglePlay('right'));
 
   /** Define keyboard controls (up/down/left/right vimlike k/j/h/l). */
   document.addEventListener('keypress', (ev) => {
+    if (favPicking) return;
     /** If sorting is in progress. */
     if (timestamp && !timeTaken && !loading && choices.length === battleNo - 1) {
       switch(ev.key) {
@@ -182,10 +211,29 @@ function start() {
     }
   });
 
+  /** A song can be on several of the selected releases (single, album...). Only its oldest version is kept. */
+  const oldestVersion = {};
+  characterDataToSort.forEach(char => {
+    if (char.song && !(releaseOrder(char) >= oldestVersion[char.song])) oldestVersion[char.song] = releaseOrder(char);
+  });
+  characterDataToSort = characterDataToSort.filter(char => !char.song || releaseOrder(char) === oldestVersion[char.song]);
+
   if (characterDataToSort.length < 2) {
     alert('Cannot sort with less than two characters. Please reselect.');
     return;
   }
+
+  /** Favorites: first mark them on a grid (full mode can skip it). */
+  if (!favDone || (sortMode === 'top10' && !favStr) || (favStr && favStr.length !== characterDataToSort.length)) {
+    favStr  = '';
+    favDone = false;
+    favShow();
+    return;
+  }
+
+  characterData.forEach(char => char.isFav = false);
+  characterDataToSort.forEach((char, idx) => char.isFav = favStr[idx] === '1');
+  if (sortMode === 'top10') characterDataToSort = characterDataToSort.filter(char => char.isFav);
 
   /** Shuffle character array with timestamp seed. */
   timestamp = timestamp || new Date().getTime();
@@ -248,6 +296,7 @@ function start() {
 
   /** Disable all checkboxes and hide/show appropriate parts while we preload the images. */
   document.querySelectorAll('input[type=checkbox]').forEach(cb => cb.disabled = true);
+  document.querySelector('.filters').style.display = 'none';
   document.querySelectorAll('.starting.button').forEach(el => el.style.display = 'none');
   document.querySelector('.loading.button').style.display = 'block';
   document.querySelector('.progress').style.display = 'block';
@@ -281,7 +330,10 @@ function togglePlay(side) {
     audioPlayer.preload = 'none';
     audioPlayer.addEventListener('timeupdate', () => {
       if (!audioSide || !audioPlayer.duration) return;
-      document.querySelector(`.${audioSide}.sort.player .playfill`).style.width = `${audioPlayer.currentTime * 100 / audioPlayer.duration}%`;
+      const percent = `${audioPlayer.currentTime * 100 / audioPlayer.duration}%`;
+      const current = document.querySelector(`.${audioSide}.sort.player`);
+      current.querySelector('.playfill').style.width = percent;
+      current.style.setProperty('--p', percent);   // The ring of the favorites grid uses this.
     });
     audioPlayer.addEventListener('ended', stopAudio);
   }
@@ -317,7 +369,116 @@ function stopAudio() {
     el.classList.remove('playing');
     el.querySelector('.playbtn').innerHTML = '&#9654;';
     el.querySelector('.playfill').style.width = '0%';
+    el.style.setProperty('--p', '0%');
   });
+}
+
+/** Shows the current mode on its button. */
+function setModeButton() {
+  const btn = document.querySelector('.starting.mode.button');
+  btn.textContent = `Mode: ${modeNames[sortMode]}`;
+  btn.title = modeInfo[sortMode];
+}
+
+/** HTML of one row of the favorites grid: cover, title and a play button (with its own player, named by key). */
+function pickCard(char, key, idx) {
+  const src = char.img.indexOf('data:') === 0 ? char.img : imageRoot + char.img;
+  audioFiles[key] = char.audio;
+  return `<div class="card favrow" data-i="${idx}"><span class="badge"></span><img class="image" src="${src}"><div class="text"><p>${char.romaji}</p><p class="album">${char.album}</p></div>${char.audio ? `<div class="${key} sort player" data-key="${key}"><span class="playbtn">&#9654;</span><div class="playbar"><div class="playfill"></div></div></div>` : ''}</div>`;
+}
+
+/** Makes the cards of a grid clickable. The player on a card doesn't count as a pick. */
+function bindPickCards(grid, onPick) {
+  grid.querySelectorAll('.card').forEach(card => card.addEventListener('click', () => onPick(card)));
+  grid.querySelectorAll('.player').forEach(pl => pl.addEventListener('click', ev => {
+    ev.stopPropagation();
+    togglePlay(pl.dataset.key);
+  }));
+}
+
+/**
+ * How old the release of a song is (lower is older). Releases have an "order" number, and the older data set
+ * only has the "Released on ..." date in its text, which is used instead. If it has several releases, the oldest one.
+ */
+function releaseOrder(char) {
+  const values = [];
+  options.forEach(opt => {
+    if (opt.key !== 'release' || !('sub' in opt) || !char.opts[opt.key]) return;
+    opt.sub.forEach(sub => {
+      if (!char.opts[opt.key].includes(sub.key)) return;
+      const date = /\d{4}-\d{2}-\d{2}/.exec(sub.tooltip || '');
+      if (sub.order !== undefined) values.push(sub.order);
+      else if (date) values.push(Date.parse(date[0]));
+    });
+  });
+  return values.length ? Math.min(...values) : Infinity;
+}
+
+/** Grid with all the songs to mark the favorites, from the oldest release to the newest. */
+function favShow() {
+  favPicking = true;
+  stopAudio();
+  audioFiles = {};
+  const order = characterDataToSort
+    .map((char, idx) => ({ char, idx, age: releaseOrder(char) }))
+    .sort((a, b) => a.age - b.age || a.idx - b.idx);
+  const grid = document.querySelector('.favgrid');
+  grid.innerHTML = order.map(item => pickCard(item.char, `f${item.idx}`, item.idx)).join('');
+  bindPickCards(grid, card => { card.classList.toggle('marked'); favCount(); });
+  grid.querySelectorAll('.badge').forEach(el => el.textContent = '\u2713');
+  document.querySelector('.favskip.button').style.display = sortMode === 'full' ? '' : 'none';
+  document.querySelector('.sorter').style.display = 'none';
+  document.querySelector('.filters').style.display = 'none';
+  document.querySelector('.favscreen').style.display = 'block';
+  favCount();
+  window.scrollTo(0, 0);
+}
+
+/** Minimum number of favorites to continue. */
+function favMin() {
+  return sortMode === 'top10' ? Math.min(10, characterDataToSort.length) : 1;
+}
+
+/** Updates the counter and the Continue button of the favorites grid. */
+function favCount() {
+  const count = document.querySelectorAll('.favgrid .card.marked').length;
+  const hint  = sortMode === 'top10'
+    ? `Tap the songs you like most. About 15 works well, at least ${favMin()}.`
+    : 'Tap the songs you like most, or press Skip. Favorites are ranked above the rest and never compared with a song that isn\'t one.';
+  document.querySelector('.favhint').textContent = `${hint} Selected: ${count}`;
+  document.querySelector('.favdone.button').classList.toggle('disabled', count < favMin());
+}
+
+function favHide() {
+  stopAudio();
+  favPicking = false;
+  document.querySelector('.favscreen').style.display = 'none';
+  document.querySelector('.sorter').style.display = '';
+  document.querySelector('.filters').style.display = '';
+  window.scrollTo(0, 0);
+}
+
+function favCancel() {
+  favStr  = '';
+  favDone = false;
+  favHide();
+}
+
+function favSkip() {
+  favStr  = '';
+  favDone = true;
+  favHide();
+  start();
+}
+
+function favDone_() {
+  if (document.querySelector('.favdone.button').classList.contains('disabled')) return;
+  const marks = [];
+  document.querySelectorAll('.favgrid .card').forEach(card => marks[Number(card.dataset.i)] = card.classList.contains('marked') ? '1' : '0');
+  favStr  = marks.join('');
+  favDone = true;
+  favHide();
+  start();
 }
 
 /** Displays the current state of the sorter. */
@@ -328,9 +489,12 @@ function display() {
   const leftChar        = characterDataToSort[leftCharIndex];
   const rightChar       = characterDataToSort[rightCharIndex];
 
+  /** A favorite always beats a song that isn't one, so that battle is decided without asking (and it is saved in choices). */
+  if (leftChar.isFav !== rightChar.isFav) { pick(leftChar.isFav ? 'left' : 'right', true); return; }
+
   const charNameDisp = char => `<p>${char.romaji}</p>${char.romaji !== char.name ? `<p class="jp">${char.name}</p>` : ''}<p class="album">${char.album}</p>`;
 
-  progressBar(`Battle No. ${battleNo}`, percent);
+  progressBar(`Battle No. ${battleNo - autoNo}`, percent);
 
   document.querySelector('.left.sort.image').src = leftChar.img;
   document.querySelector('.right.sort.image').src = rightChar.img;
@@ -360,11 +524,20 @@ function display() {
  * Sort between two character choices or tie.
  * 
  * @param {'left'|'right'|'tie'} sortType
+ * @param {boolean} auto True when the sorter decides by itself (favorite vs not favorite). Those are not undone one by one.
  */
-function pick(sortType) {
+function pick(sortType, auto = false) {
   if ((timeTaken && choices.length === battleNo - 1) || loading) { return; }
   else if (!timestamp) { return start(); }
 
+  if (auto) {
+    autoNo++;
+  } else {
+    prevSet    = true;
+    autoNoPrev = autoNo;
+  }
+
+  if (!auto) {
   sortedIndexListPrev = sortedIndexList.slice(0);
   recordDataListPrev  = recordDataList.slice(0);
   parentIndexListPrev = parentIndexList.slice(0);
@@ -377,6 +550,7 @@ function pick(sortType) {
   battleNoPrev        = battleNo;
   sortedNoPrev        = sortedNo;
   pointerPrev         = pointer;
+  }
 
   /** 
    * For picking 'left' or 'right':
@@ -472,7 +646,7 @@ function pick(sortType) {
   if (leftIndex < 0) {
     timeTaken = timeTaken || new Date().getTime() - timestamp;
 
-    progressBar(`Battle No. ${battleNo} - Completed!`, 100);
+    progressBar(`Battle No. ${battleNo - autoNo} - Completed!`, 100);
 
     result();
   } else {
@@ -525,7 +699,8 @@ function result() {
   document.querySelector('.filters').style.display = 'none';
   document.querySelector('.info').style.display = 'none';
 
-  const header = '<div class="result head">My Ranking</div>';
+  const limit = sortMode === 'full' ? characterDataToSort.length : Math.min(10, sortedIndexList[0].length);
+  const header = `<div class="result head">${sortMode === 'full' ? 'My Ranking' : 'My Top 10'}</div>`;
   const timeStr = `This sorter was completed on ${new Date(timestamp + timeTaken).toString()} and took ${msToReadableTime(timeTaken)}. <a href="${location.protocol}//${sorterURL}">Do another sorter?</a>`;
   const res = (char, num) => {
     return `<div class="result"><div class="left">${num}</div><div class="right"><span>${char.romaji}</span>${char.romaji !== char.name ? `<span class="jp">${char.name}</span>` : ''}<span class="album">${char.album}</span></div></div>`;
@@ -539,16 +714,16 @@ function result() {
   const timeElem = document.querySelector('.time.taken');
 
   resultTable.innerHTML = header;
-  resultTable.style.gridTemplateRows = `repeat(${Math.ceil(characterDataToSort.length / 2) + 1}, auto)`;
+  resultTable.style.gridTemplateRows = `repeat(${Math.ceil(limit / 2) + 1}, auto)`;
   timeElem.innerHTML = timeStr;
 
-  characterDataToSort.forEach((val, idx) => {
+  characterDataToSort.slice(0, limit).forEach((val, idx) => {
     const characterIndex = finalSortedIndexes[idx];
     const character = characterDataToSort[characterIndex];
     resultTable.insertAdjacentHTML('beforeend', res(character, rankNum));
     finalCharacters.push({ rank: rankNum, name: character.name, romaji: character.romaji });
 
-    if (idx < characterDataToSort.length - 1) {
+    if (idx < limit - 1) {
       if (tiedDataList[characterIndex] === finalSortedIndexes[idx + 1]) {
         tiedRankNum++;            // Indicates how many people are tied at the same rank.
       } else {
@@ -561,9 +736,11 @@ function result() {
 
 /** Undo previous choice. */
 function undo() {
-  if (timeTaken || choices.length === 0) { return; }
+  if (timeTaken || !prevSet) { return; }
 
-  choices = battleNo === battleNoPrev ? choices : choices.slice(0, -1);
+  /** Goes back to the last battle that was asked, dropping the automatic ones that came after it. */
+  choices = choices.slice(0, battleNoPrev - 1);
+  autoNo  = autoNoPrev;
 
   sortedIndexList = sortedIndexListPrev.slice(0);
   recordDataList  = recordDataListPrev.slice(0);
@@ -657,7 +834,8 @@ function generateTextList() {
 }
 
 function generateSavedata() {
-  const saveData = `${timeError?'|':''}${timestamp}|${timeTaken}|${choices}|${optStr}${suboptStr}`;
+  const modeStr = sortMode === 'top10' ? `|mf${favStr}` : favStr.includes('1') ? `|mw${favStr}` : '';   // Full mode without favorites adds nothing, so old links keep working.
+  const saveData = `${timeError?'|':''}${timestamp}|${timeTaken}|${choices}|${optStr}${suboptStr}${modeStr}`;
   return LZString.compressToEncodedURIComponent(saveData);
 }
 
@@ -748,6 +926,17 @@ function decodeQuery(queryString = window.location.search.slice(1)) {
     timestamp = Number(decoded.splice(0, 1)[0]);
     timeTaken = Number(decoded.splice(0, 1)[0]);
     choices   = decoded.splice(0, 1)[0];
+
+    /** Sorting mode is the last piece, if there is one. */
+    sortMode = 'full';
+    favStr   = '';
+    favDone  = true;
+    if (decoded.length > 1 && /^m[wf]/.test(decoded[decoded.length - 1])) {
+      const modePiece = decoded.pop();
+      sortMode = modePiece[1] === 'f' ? 'top10' : 'full';
+      favStr   = modePiece.slice(2);
+    }
+    setModeButton();
 
     const optDecoded    = decoded.splice(0, 1)[0];
     const suboptDecoded = decoded.slice(0);
